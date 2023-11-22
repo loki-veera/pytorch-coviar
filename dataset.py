@@ -78,16 +78,24 @@ class CoviarDataSet(data.Dataset):
         self._load_list(video_list)
 
     def _load_list(self, video_list):
-        self._video_list = []
-        with open(video_list, 'r') as f:
-            for line in f:
-                video, _, label = line.strip().split()
-                video_path = os.path.join(self._data_root, video[:-4] + '.mp4')
-                self._video_list.append((
-                    video_path,
-                    int(label),
-                    get_num_frames(video_path)))
+        # self._video_list = []
+        # with open(video_list, 'r') as f:
+        #     for line in f:
+        #         video, _, label = line.strip().split()
+        #         video_path = os.path.join(self._data_root, video[:-4] + '.mp4')
+        #         self._video_list.append((
+        #             video_path,
+        #             int(label),
+        #             get_num_frames(video_path)))
 
+        # print('%d videos loaded.' % len(self._video_list))
+        self._video_list = []
+        for video, label in video_list:
+            self._video_list.append((
+                video,
+                int(label),
+                get_num_frames(video)
+            ))
         print('%d videos loaded.' % len(self._video_list))
 
     def _get_train_frame_index(self, num_frames, seg):
