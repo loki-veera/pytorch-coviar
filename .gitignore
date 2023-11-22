@@ -1,1 +1,2 @@
-!data/UCF101/*
+data/UCF101/*
+*.pyc
